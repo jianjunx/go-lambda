@@ -1,0 +1,2 @@
+{"level":"ERROR","time":"2021-07-17T16:16:25.823+0800","caller":"mysql/mysql.go:22","msg":"connect DB failed, err","error":"dial tcp 127.0.0.1:3306: connect: connection refused"}
+{"level":"ERROR","time":"2021-07-17T16:17:27.670+0800","caller":"mysql/mysql.go:22","msg":"connect DB failed, err","error":"dial tcp 127.0.0.1:3306: connect: connection refused"}

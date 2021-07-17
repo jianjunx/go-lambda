@@ -19,11 +19,11 @@ import (
 var logger *zap.Logger
 
 // Init 初始化Logger
-func Init(cfg *settings.SettingConfig) (err error) {
-	writeSyncer := getLogWriter(cfg.Log.Filename, cfg.Log.Maxsize, cfg.Log.Maxbackups, cfg.Log.Maxage)
+func Init(conf *settings.Log) (err error) {
+	writeSyncer := getLogWriter(conf.Filename, conf.Maxsize, conf.Maxbackups, conf.Maxage)
 	encoder := getEncoder()
 	var l = new(zapcore.Level)
-	err = l.UnmarshalText([]byte(cfg.Log.Level))
+	err = l.UnmarshalText([]byte(conf.Level))
 	if err != nil {
 		return
 	}

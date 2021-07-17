@@ -14,16 +14,20 @@ type App struct {
 	Version string `mapstructure:"version"`
 }
 type Mysql struct {
-	Host   string `mapstructure:"host"`
-	Port   int    `mapstructure:"port"`
-	User   string `mapstructure:"user"`
-	Passwd string `mapstructure:"passwd"`
+	Host         string `mapstructure:"host"`
+	Port         int    `mapstructure:"port"`
+	User         string `mapstructure:"user"`
+	Passwd       string `mapstructure:"passwd"`
+	Dbname       string `mapstructure:"dbname"`
+	MaxOpenConns int    `mapstructure:"max_open_conns"`
+	MaxIdleConns int    `mapstructure:"max_idle_conns"`
 }
 
 type Redis struct {
-	Host   string `mapstructure:"host"`
-	Port   int    `mapstructure:"port"`
-	Passwd string `mapstructure:"passwd"`
+	Host     string `mapstructure:"host"`
+	Port     int    `mapstructure:"port"`
+	Passwd   string `mapstructure:"passwd"`
+	Poolsize int    `mapstructure:"poolsize"`
 }
 
 type Log struct {

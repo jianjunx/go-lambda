@@ -9,11 +9,15 @@ mysql:
   port: 3306
   user: 'root'
   passwd: 'root'
+  dbname: 'test'
+  max_open_conns: 20
+  max_idle_conns: 10
 
 redis:
   host: '127.0.0.1'
   port: 3306
   passwd: 'redis123'
+  poolsize: 100
 
 log:
   level: 'debug'
