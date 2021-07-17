@@ -1,0 +1,23 @@
+app:
+  name: 'ginapp'
+  env: 'dev'
+  port: 3000
+  version: '1.0.0'
+
+mysql:
+  host: '127.0.0.1'
+  port: 3306
+  user: 'root'
+  passwd: 'root'
+
+redis:
+  host: '127.0.0.1'
+  port: 3306
+  passwd: 'redis123'
+
+log:
+  level: 'debug'
+  filename: './logs/ginapp.log'
+  maxsize: 1
+  maxbackups: 5
+  maxage: 30
