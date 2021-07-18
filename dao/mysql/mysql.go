@@ -9,7 +9,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var DB *sqlx.DB
+var db *sqlx.DB
 
 func Init(conf *settings.Mysql) (err error) {
 	dsn := fmt.Sprintf(
@@ -17,12 +17,16 @@ func Init(conf *settings.Mysql) (err error) {
 		conf.User, conf.Passwd, conf.Host, conf.Port, conf.Dbname,
 	)
 	// 也可以使用MustConnect连接不成功就panic
-	DB, err = sqlx.Connect("mysql", dsn)
+	db, err = sqlx.Connect("mysql", dsn)
 	if err != nil {
 		zap.L().Error("connect DB failed, err", zap.Error(err))
 		return
 	}
-	DB.SetMaxOpenConns(conf.MaxOpenConns)
-	DB.SetMaxIdleConns(conf.MaxIdleConns)
+	db.SetMaxOpenConns(conf.MaxOpenConns)
+	db.SetMaxIdleConns(conf.MaxIdleConns)
 	return
+}
+
+func Close() {
+	db.Close()
 }

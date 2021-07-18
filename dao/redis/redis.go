@@ -9,11 +9,11 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-var RDB *redis.Client
+var rdb *redis.Client
 
 func Init(conf *settings.Redis) (err error) {
 	addr := fmt.Sprintf("%s:%v", conf.Host, conf.Port)
-	RDB = redis.NewClient(&redis.Options{
+	rdb = redis.NewClient(&redis.Options{
 		Addr:     addr,
 		Password: conf.Passwd,
 		DB:       0,             // use default DB
@@ -22,6 +22,10 @@ func Init(conf *settings.Redis) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	_, err = RDB.Ping(ctx).Result()
+	_, err = rdb.Ping(ctx).Result()
 	return err
+}
+
+func Close() {
+	rdb.Close()
 }

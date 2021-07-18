@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -15,6 +14,8 @@ import (
 	"gin-template/logger"
 	"gin-template/routers"
 	"gin-template/settings"
+
+	"go.uber.org/zap"
 )
 
 func main() {
@@ -31,6 +32,8 @@ func main() {
 		fmt.Printf("Logger初始化失败 %v\n", err)
 		return
 	}
+	lg := zap.L()
+	defer lg.Sync()
 
 	// 初始化MySQL链接
 	err = mysql.Init(&settings.Config.Mysql)
@@ -38,6 +41,7 @@ func main() {
 		fmt.Printf("Mysql初始化失败 %v\n", err)
 		return
 	}
+	defer mysql.Close()
 
 	// 初始化Redis链接
 	err = redis.Init(&settings.Config.Redis)
@@ -45,7 +49,8 @@ func main() {
 		fmt.Printf("Redis初始化失败 %v\n", err)
 		return
 	}
-
+	defer redis.Close()
+	
 	// 注册路由
 	r := routers.Setup()
 
@@ -58,7 +63,7 @@ func main() {
 	go func() {
 		// 开启一个goroutine启动服务
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("listen: %s\n", err)
+			lg.Error("listen: %s\n", zap.Error(err))
 		}
 	}()
 
@@ -70,14 +75,14 @@ func main() {
 	// signal.Notify把收到的 syscall.SIGINT或syscall.SIGTERM 信号转发给quit
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM) // 此处不会阻塞
 	<-quit                                               // 阻塞在此，当接收到上述两种信号时才会往下执行
-	log.Println("Shutdown Server ...")
+	lg.Info("Shutdown Server ...")
 	// 创建一个5秒超时的context
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	// 5秒内优雅关闭服务（将未处理完的请求处理完再关闭服务），超过5秒就超时退出
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Fatal("Server Shutdown: ", err)
+		lg.Fatal("Server Shutdown: ", zap.Error(err))
 	}
 
-	log.Println("Server exiting")
+	lg.Info("Server exiting")
 }
