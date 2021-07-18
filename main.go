@@ -50,7 +50,7 @@ func main() {
 		return
 	}
 	defer redis.Close()
-	
+
 	// 注册路由
 	r := routers.Setup()
 

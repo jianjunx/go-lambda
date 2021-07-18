@@ -46,7 +46,9 @@ type SettingConfig struct {
 }
 
 func Init() (err error) {
-	viper.SetConfigFile("config.yaml")
+	// viper.SetConfigFile("config.yaml")
+	viper.SetConfigName("config")
+	viper.AddConfigPath("./")
 	err = viper.ReadInConfig()
 	if err != nil {
 		panic(err)
