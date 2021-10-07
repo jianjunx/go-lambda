@@ -1,6 +1,7 @@
 package router
 
 import (
+	"go-zone/config"
 	"go-zone/src/controller"
 
 	"github.com/gin-gonic/gin"
@@ -24,6 +25,11 @@ func GetRoute() *gin.Engine {
 }
 
 func init() {
+	// 当前环境是serverless则手动设置为ReleaseMode
+	if config.GetConfig().Env == config.ENV_SLS {
+		gin.SetMode(gin.ReleaseMode)
+	}
+	// 初始化gin
 	r = gin.Default()
 	setup()
 }

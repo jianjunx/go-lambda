@@ -1,6 +1,7 @@
 package config
 
 var (
-	ENV_DEV  = "develop"
-	ENV_PROD = "production"
+	ENV_DEV  = "debug"
+	ENV_PROD = "release"
+	ENV_SLS = "serverlsess"
 )

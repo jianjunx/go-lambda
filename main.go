@@ -14,7 +14,7 @@ func main() {
 	// 配置实例
 	conf := config.GetConfig()
 	// 生产环境初始化lambda
-	if conf.Env == config.ENV_PROD {
+	if conf.Env == config.ENV_SLS {
 		lambda.Init(router.GetRoute())
 		return
 	}
