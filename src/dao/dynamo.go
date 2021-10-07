@@ -19,3 +19,7 @@ func DynamoInit() {
 	region := config.GetConfig().Dynamo.Region
 	db = dynamo.New(sess, &aws.Config{Region: aws.String(region)})
 }
+
+func getPostTable() dynamo.Table {
+	return getTable(config.GetConfig().PostTableName)
+}

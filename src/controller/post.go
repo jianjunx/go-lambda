@@ -1,30 +1,42 @@
 package controller
 
 import (
-	"context"
+	"fmt"
 	"go-zone/src/model"
 	"go-zone/src/service"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
+// 语雀webhook post请求的body
 type addPostBody struct {
 	Data model.PostAttributes `json:"data"`
 }
 
+// 处理语雀webhook请求
 func PostWebhookYuqueHandler(c *gin.Context) {
 	p := addPostBody{}
-	context.TODO()
 	err := c.BindJSON(&p)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
+		respError(c, err)
 		return
 	}
 	err = service.PostItemDataAdd(&p.Data)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
+		fmt.Println("add data err: ", err)
+		respError(c, err)
 		return
 	}
-	c.JSON(http.StatusOK, nil)
+	fmt.Println("success")
+	respSuccess(c, nil)
+}
+
+// post列表
+func PostListGetHandler(c *gin.Context) {
+	list, err := service.PostListGet()
+	if err != nil {
+		respError(c, err)
+		return
+	}
+	respSuccess(c, list)
 }

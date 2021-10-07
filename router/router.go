@@ -6,13 +6,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Setup() *gin.Engine {
-	r := gin.New()
+var r *gin.Engine
+
+func setup() {
 	// 注册路由
 	v1 := r.Group("/api/v1")
 	{
 		// 数据
 		v1.POST("/webhook/yuque", controller.PostWebhookYuqueHandler)
+		// 获取列表数据
+		v1.GET("/posts", controller.PostListGetHandler)
 	}
+}
+
+func GetRoute() *gin.Engine {
 	return r
+}
+
+func init() {
+	r = gin.Default()
+	setup()
 }

@@ -24,9 +24,18 @@ type SettingConfig struct {
 }
 
 func init() {
-	// viper.SetConfigFile("config.yaml")
-	viper.SetConfigName("config")
+	viper.BindEnv("GIN_MODE")
 	viper.AddConfigPath("./config")
+
+	// 根据环境变量读取配置文件
+	if viper.Get("GIN_MODE") == "release" {
+		fmt.Println("gin_mode:release")
+		viper.SetConfigName("release.config")
+	} else {
+		viper.SetConfigName("debug.config")
+		fmt.Println("gin_mode:debug")
+	}
+
 	viper.ReadInConfig()
 	unmarshal()
 	viper.WatchConfig()
@@ -34,6 +43,7 @@ func init() {
 		fmt.Println("配置文件修改了")
 		unmarshal()
 	})
+
 }
 
 var config SettingConfig = SettingConfig{
