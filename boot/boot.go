@@ -1,6 +1,9 @@
 package boot
 
-import "gin-template/src/dao"
+import (
+	_ "go-zone/config"
+	"go-zone/src/dao"
+)
 
 func init() {
 	dao.DynamoInit()

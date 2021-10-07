@@ -1,4 +1,4 @@
-package boot
+package config
 
 import (
 	"fmt"
@@ -13,25 +13,20 @@ type App struct {
 	Port    int    `mapstructure:"port"`
 	Version string `mapstructure:"version"`
 }
-type Mysql struct {
-	Host         string `mapstructure:"host"`
-	Port         int    `mapstructure:"port"`
-	User         string `mapstructure:"user"`
-	Passwd       string `mapstructure:"passwd"`
-	Dbname       string `mapstructure:"dbname"`
-	MaxOpenConns int    `mapstructure:"max_open_conns"`
-	MaxIdleConns int    `mapstructure:"max_idle_conns"`
+type Dynamo struct {
+	Region        string `mapstructure:"region"`
+	PostTableName string `mapstructure:"post_table_name"`
 }
 
 type SettingConfig struct {
-	App   `mapstructure:"app"`
-	Mysql `mapstructure:"mysql"`
+	App    `mapstructure:"app"`
+	Dynamo `mapstructure:"dynamo"`
 }
 
 func init() {
 	// viper.SetConfigFile("config.yaml")
 	viper.SetConfigName("config")
-	viper.AddConfigPath("../config")
+	viper.AddConfigPath("./config")
 	viper.ReadInConfig()
 	unmarshal()
 	viper.WatchConfig()
@@ -41,8 +36,14 @@ func init() {
 	})
 }
 
-var Config SettingConfig
+var config SettingConfig = SettingConfig{
+	Dynamo: Dynamo{Region: "ap-northeast-1", PostTableName: "YQ_POST_TABLE"},
+}
 
 func unmarshal() {
-	viper.Unmarshal(&Config)
+	viper.Unmarshal(&config)
+}
+
+func GetConfig() *SettingConfig {
+	return &config
 }

@@ -1,14 +1,16 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
-	_ "gin-template/boot"
-	"gin-template/routers"
+	_ "go-zone/boot"
+	"go-zone/config"
+	"go-zone/router"
 )
 
 func main() {
 	// 注册路由
-	r := routers.Setup()
-	http.ListenAndServe(":3000", r)
+	r := router.Setup()
+	http.ListenAndServe(fmt.Sprintf(":%v", config.GetConfig().Port), r)
 }

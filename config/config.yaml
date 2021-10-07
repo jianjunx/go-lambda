@@ -1,15 +1,9 @@
 app:
-  name: 'ginapp'
-  env: 'dev'
+  name: "ginapp"
+  env: "dev"
   port: 3000
-  version: '1.0.0'
+  version: "1.0.0"
 
-mysql:
-  host: '127.0.0.1'
-  port: 3306
-  user: 'root'
-  passwd: 'root'
-  dbname: 'test'
-  max_open_conns: 20
-  max_idle_conns: 10
-
+dynamo:
+  region: "ap-northeast-1"
+  post_table_name: "YQ_POST_TABLE"

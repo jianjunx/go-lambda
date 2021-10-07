@@ -1,8 +1,9 @@
-package controllers
+package controller
 
 import (
 	"context"
-	"gin-template/src/model"
+	"go-zone/src/model"
+	"go-zone/src/service"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,6 +18,12 @@ func PostWebhookYuqueHandler(c *gin.Context) {
 	context.TODO()
 	err := c.BindJSON(&p)
 	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		return
+	}
+	err = service.PostItemDataAdd(&p.Data)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
 		return
 	}
 	c.JSON(http.StatusOK, nil)
