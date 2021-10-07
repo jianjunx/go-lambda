@@ -1,9 +1,0 @@
-app:
-  name: "ginapp"
-  env: "prod"
-  port: 3000
-  version: "1.0.0"
-
-dynamo:
-  region: "ap-northeast-1"
-  post_table_name: "YQ_POST_TABLE"
