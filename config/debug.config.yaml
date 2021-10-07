@@ -5,5 +5,5 @@ app:
   version: "1.0.0"
 
 dynamo:
-  region: "ap-northeast-1"
+  region: "ap-southeast-1"
   post_table_name: "YQ_POST_TABLE"

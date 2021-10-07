@@ -47,7 +47,7 @@ func init() {
 }
 
 var config SettingConfig = SettingConfig{
-	Dynamo: Dynamo{Region: "ap-northeast-1", PostTableName: "YQ_POST_TABLE"},
+	Dynamo: Dynamo{Region: "ap-southeast-1", PostTableName: "YQ_POST_TABLE"},
 }
 
 func unmarshal() {
