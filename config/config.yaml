@@ -13,15 +13,3 @@ mysql:
   max_open_conns: 20
   max_idle_conns: 10
 
-redis:
-  host: '127.0.0.1'
-  port: 3306
-  passwd: 'redis123'
-  poolsize: 100
-
-log:
-  level: 'debug'
-  filename: './logs/ginapp.log'
-  maxsize: 1
-  maxbackups: 5
-  maxage: 30

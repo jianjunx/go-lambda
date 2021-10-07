@@ -1,0 +1,93 @@
+START RequestId:82346357b95a98fc3d1c88edcb99753e
+2021-10-06T07:36:46.585Z	82346357b95a98fc3d1c88edcb99753e	event >>> : 
+{ 
+body:headerParameters: {},
+   '{
+    "data":{
+      "id":16514526,
+      "slug":"ptdm9t",
+      "title":"JS格式化Excel解析的5位日期戳",
+      "book_id":446092,
+      "book":{
+        "id":446092,
+        "type":"Book",
+        "slug":"kb",
+        "name":"博客知识库",
+        "user_id":476855,
+        "description":"可用于学习笔记、周报、项目文档等场景",
+        "creator_id":0,
+        "public":0,
+        "items_count":21,
+        "likes_count":0,
+        "watches_count":0,
+        "content_updated_at":"2021-10-06T07:36:43.147Z",
+        "updated_at":"2021-10-06T07:36:43.000Z",
+        "created_at":"2019-09-04T09:38:17.000Z",
+        "user":null,
+        "_serializer":"v2.book"
+        },
+      "user_id":476855,
+      "user":{
+        "id":476855,
+        "type":"User",
+        "login":"jianjunxie",
+        "name":"谢小舜",
+        "description":null,
+        "avatar_url":"https://cdn.nlark.com/yuque/0/2020/png/476855/1597942117047-avatar/b6179c9d-0f0e-457c-8a15-f93e650a5b6d.png",
+        "books_count":2,
+        "public_books_count":0,
+        "followers_count":0,
+        "following_count":0,
+        "created_at":"2019-09-04T09:38:07.000Z",
+        "updated_at":"2021-07-09T07:50:03.000Z",
+        "_serializer":"v2.user"
+        },
+      "format":"lake",
+      "body":"![image.png](https://cdn.nlark.com/yuque/0/2020/png/476855/1606302274151-0139b104-c9e5-4485-8eed-174126c91e63.png#height=554&id=n7KwF&margin=%5Bobject%20Object%5D&name=image.png&originHeight=554&originWidth=752&originalType=binary&ratio=1&size=46459&status=done&style=none&width=752)<br />项目中在前端做Excel导入时出现一个问题，日期的列没有设置文本格式时输入的日期会自动转换成2020/2/2这种斜线格式:::。<br />在前端js解析完后读取的日期变成了5位的数字日期戳，如下。\\n```javascript\\n43863 // 对应的时 \\"2020-2-1\\"\\n```\\n这样直接保存到后台会导致报错，所以我们还是要把它转换正标准的日期格式。\\n```javascript\\nfunction formatExcelDate(numb, format = \'-\') {\\n  const time = new Date((numb - 1) * 24 * 3600000 + 1)\\n  time.setYear(time.getFullYear() - 70)\\n  const year = time.getFullYear() + \'\'\\n  const month = time.getMonth() + 1 + \'\'\\n  const date = time.getDate() - 1 + \'\'\\n  if (format && format.length === 1) {\\n    return year + format + month + format + date\\n  }\\n  return year + (month < 10 ? \'0\' + month : month) + (date < 10 ? \'0\' + date : date)\\n}\\n\\nformatExcelDate(43863)\\n// 得到的结果是 \\"2020-2-1\\"\\n```\\n这个问题坑了我好长时间，记录一下防止下次遇到又踩一遍坑。<br />​\\n\\n[:$前端,#Excel,#日期:]\\n",
+      "body_draft":"![image.png](https://cdn.nlark.com/yuque/0/2020/png/476855/1606302274151-0139b104-c9e5-4485-8eed-174126c91e63.png#height=554&id=n7KwF&margin=%5Bobject%20Object%5D&name=image.png&originHeight=554&originWidth=752&originalType=binary&ratio=1&size=46459&status=done&style=none&width=752)<br />项目中在前端做Excel导入时出现一个问题，日期的列没有设置文本格式时输入的日期会自动转换成2020/2/2这种斜线格式:::。<br />在前端js解析完后读取的日期变成了5位的数字日期戳，如下。\\n```javascript\\n43863 // 对应的时 \\"2020-2-1\\"\\n```\\n这样直接保存到后台会导致报错，所以我们还是要把它转换正标准的日期格式。\\n```javascript\\nfunction formatExcelDate(numb, format = \'-\') {\\n  const time = new Date((numb - 1) * 24 * 3600000 + 1)\\n  time.setYear(time.getFullYear() - 70)\\n  const year = time.getFullYear() + \'\'\\n  const month = time.getMonth() + 1 + \'\'\\n  const date = time.getDate() - 1 + \'\'\\n  if (format && format.length === 1) {\\n    return year + format + month + format + date\\n  }\\n  return year + (month < 10 ? \'0\' + month : month) + (date < 10 ? \'0\' + date : date)\\n}\\n\\nformatExcelDate(43863)\\n// 得到的结果是 \\"2020-2-1\\"\\n```\\n这个问题坑了我好长时间，记录一下防止下次遇到又踩一遍坑。<br />​\\n\\n[:$前端,#Excel,#日期:]\\n",
+      "body_html":"<!doctype html><div class=\\"lake-content\\" typography=\\"traditional\\"><p id=\\"a20d224c568e48b9d67847a2c66a8c01_p_0\\" class=\\"ne-p\\"><img src=\\"https://cdn.nlark.com/yuque/0/2020/png/476855/1606302274151-0139b104-c9e5-4485-8eed-174126c91e63.png\\" width=\\"752\\" id=\\"n7KwF\\" class=\\"ne-image\\"></p><p id=\\"f36dd8d2180df69a73bad58b1b4c1207\\" class=\\"ne-p\\"><span class=\\"ne-text\\">项目中在前端做Excel导入时出现一个问题，日期的列没有设置文本格式时输入的日期会自动转换成2020/2/2这种斜线格式:::。</span></p><p id=\\"128f7475e30d39c7aff1a8b742944b00\\" class=\\"ne-p\\"><span class=\\"ne-text\\">在前端js解析完后读取的日期变成了5位的数字日期戳，如下。</span></p><pre data-language=\\"javascript\\" id=\\"RG7EL\\" class=\\"ne-codeblock language-javascript\\">43863 // 对应的时 &quot;2020-2-1&quot;</pre><p id=\\"66b3794f06e6bbcbdb9d7d91a2146779\\" class=\\"ne-p\\"><span class=\\"ne-text\\">这样直接保存到后台会导致报错，所以我们还是要把它转换正标准的日期格式。</span></p><pre data-language=\\"javascript\\" id=\\"PvWxq\\" class=\\"ne-codeblock language-javascript\\">function formatExcelDate(numb, format = \'-\') {\\n  const time = new Date((numb - 1) * 24 * 3600000 + 1)\\n  time.setYear(time.getFullYear() - 70)\\n  const year = time.getFullYear() + \'\'\\n  const month = time.getMonth() + 1 + \'\'\\n  const date = time.getDate() - 1 + \'\'\\n  if (format &amp;&amp; format.length === 1) {\\n    return year + format + month + format + date\\n  }\\n  return year + (month &lt; 10 ? \'0\' + month : month) + (date &lt; 10 ? \'0\' + date : date)\\n}\\n\\nformatExcelDate(43863)\\n// 得到的结果是 &quot;2020-2-1&quot;</pre><p id=\\"49bdd83adcbe08a56c647caf088c6899\\" class=\\"ne-p\\"><span class=\\"ne-text\\">这个问题坑了我好长时间，记录一下防止下次遇到又踩一遍坑。</span></p><p id=\\"ueda833a0\\" class=\\"ne-p\\"><span class=\\"ne-text\\"></span></p><p id=\\"b6e234d1fc9dad6c6e604d5add09c70f\\" class=\\"ne-p\\"><span class=\\"ne-text\\">[:$前端,#Excel,#日期:]</span></p></div>",
+      "public":1,
+      "status":1,
+      "view_status":0,
+      "read_status":1,
+      "likes_count":0,
+      "comments_count":0,
+      "content_updated_at":"2021-10-06T07:36:43.000Z",
+      "deleted_at":null,
+      "created_at":"2020-11-25T11:10:00.000Z",
+      "updated_at":"2021-10-06T07:36:43.000Z",
+      "published_at":"2021-10-06T07:36:43.000Z",
+      "first_published_at":"2020-11-25T11:18:35.000Z",
+      "word_count":250,
+      "_serializer":"webhook.doc_detail",
+      "path":"jianjunxie/kb/ptdm9t",
+      "publish":false,
+      "action_type":"update",
+      "webhook_subject_type":"update",
+      "actor_id":476855
+      }
+      }',
+  headers:
+   { connection: 'keep-alive',
+     'content-length': '6255',
+     host: 'service-9csomb0u-1251280787.gz.apigw.tencentcs.com',
+     'sofa-rpcid': '0.5',
+     'sofa-traceid': 'ac136a3316335058030771107132',
+     'content-type': 'application/json',
+  httpMethod: 'POST',
+  isBase64Encoded: false,
+     'user-agent': 'node-urllib/2.37.4 Node.js/14.17.5 (Linux 3.10; x64)' },
+  path: '/trigger_gh',
+  pathParameters: {},
+  queryStringParameters: {},
+   { httpMethod: 'ANY',
+     identity: {},
+     path: '/trigger_gh',
+  queryString: {},
+  requestContext:
+     serviceId: 'service-9csomb0u',
+     sourceIp: '139.224.19.145',
+     stage: 'test' } }
+Response RequestId:82346357b95a98fc3d1c88edcb99753e RetMsg:""
+END RequestId:82346357b95a98fc3d1c88edcb99753e
+Report RequestId:82346357b95a98fc3d1c88edcb99753e Duration:2689ms Memory:128MB MemUsage:67.281250MB

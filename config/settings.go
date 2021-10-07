@@ -1,4 +1,4 @@
-package settings
+package boot
 
 import (
 	"fmt"
@@ -23,43 +23,22 @@ type Mysql struct {
 	MaxIdleConns int    `mapstructure:"max_idle_conns"`
 }
 
-type Redis struct {
-	Host     string `mapstructure:"host"`
-	Port     int    `mapstructure:"port"`
-	Passwd   string `mapstructure:"passwd"`
-	Poolsize int    `mapstructure:"poolsize"`
-}
-
-type Log struct {
-	Level      string `mapstructure:"level"`
-	Filename   string `mapstructure:"filename"`
-	Maxsize    int    `mapstructure:"maxsize"`
-	Maxage     int    `mapstructure:"maxage"`
-	Maxbackups int    `mapstructure:"maxbackups"`
-}
-
 type SettingConfig struct {
 	App   `mapstructure:"app"`
 	Mysql `mapstructure:"mysql"`
-	Redis `mapstructure:"redis"`
-	Log   `mapstructure:"log"`
 }
 
-func Init() (err error) {
+func init() {
 	// viper.SetConfigFile("config.yaml")
 	viper.SetConfigName("config")
-	viper.AddConfigPath("./")
-	err = viper.ReadInConfig()
-	if err != nil {
-		panic(err)
-	}
+	viper.AddConfigPath("../config")
+	viper.ReadInConfig()
 	unmarshal()
 	viper.WatchConfig()
 	viper.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Println("配置文件修改了")
 		unmarshal()
 	})
-	return
 }
 
 var Config SettingConfig
