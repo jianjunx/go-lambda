@@ -24,12 +24,14 @@ provider:
   name: aws
   runtime: go1.x
   lambdaHashingVersion: 20201221
-  region: ap-southeast-1
+  region: us-west-1
+  environment:
+    GOENV_MODE: sls
   # stage: prod
 
 # you can overwrite defaults here
 #  stage: dev
-#  region: ap-southeast-1
+#  region: us-west-1
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
