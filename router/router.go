@@ -25,8 +25,9 @@ func GetRoute() *gin.Engine {
 }
 
 func init() {
-	// 当前环境是serverless则手动设置为ReleaseMode
-	if config.GetConfig().Env == config.ENV_SLS {
+	// 设置gin mode
+	env := config.GetConfig().Env
+	if env == config.ENV_SLS || env == config.ENV_PROD {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	// 初始化gin

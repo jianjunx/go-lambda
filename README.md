@@ -8,3 +8,13 @@ serverless project  golang + aws lambda  + aws dynamodb
 ```bash
 $ go mod tidy
 ```
+
+设置环境变量 dev sls prod
+```bash
+$ export GOENV_MODE=prod
+```
+
+发布到serverless
+```bash
+$ make deploy
+```

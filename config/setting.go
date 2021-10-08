@@ -24,7 +24,7 @@ type SettingConfig struct {
 }
 
 func init() {
-	viper.BindEnv("GIN_MODE")
+	viper.BindEnv(ENV_NAME)
 	viper.AddConfigPath("./config")
 	setConfigName()
 	viper.ReadInConfig()
@@ -39,15 +39,13 @@ func init() {
 
 // 根据环境变量读取配置文件
 func setConfigName() {
-	ginMode := viper.Get("GIN_MODE")
+	ginMode := viper.Get(ENV_NAME)
 	if ginMode == ENV_PROD {
-		fmt.Println("gin_mode:release")
-		viper.SetConfigName("release.config")
+		viper.SetConfigName("prod.config")
 	} else if ginMode == ENV_SLS {
-		viper.SetConfigName("serverless.config")
+		viper.SetConfigName("sls.config")
 	} else {
-		viper.SetConfigName("debug.config")
-		fmt.Println("gin_mode:debug")
+		viper.SetConfigName("dev.config")
 	}
 }
 
