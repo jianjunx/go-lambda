@@ -27,7 +27,9 @@ provider:
   region: us-west-1
   environment:
     GOENV_MODE: sls
-  # stage: prod
+    DB_REGION: us-west-1
+    POST_TABLE_NAME: YQ_POST_TABLE
+  stage: prod
 
 # you can overwrite defaults here
 #  stage: dev
@@ -67,6 +69,9 @@ functions:
           method: post
       - httpApi:
           path: /api/v1/posts
+          method: get
+      - httpApi:
+          path: /api/v1/hello
           method: get
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

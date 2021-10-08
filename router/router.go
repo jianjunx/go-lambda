@@ -3,6 +3,7 @@ package router
 import (
 	"go-zone/config"
 	"go-zone/src/controller"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,6 +18,10 @@ func setup() {
 		v1.POST("/webhook/yuque", controller.PostWebhookYuqueHandler)
 		// 获取列表数据
 		v1.GET("/posts", controller.PostListGetHandler)
+		// test
+		v1.GET("/hello", func(c *gin.Context) {
+			c.JSON(http.StatusOK, gin.H{"err": 0, "msg": "hello hel10 hel10"})
+		})
 	}
 }
 

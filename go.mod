@@ -3,6 +3,7 @@ module go-zone
 go 1.15
 
 require (
+	github.com/apex/gateway/v2 v2.0.0
 	github.com/aws/aws-lambda-go v1.27.0
 	github.com/aws/aws-sdk-go v1.40.57
 	github.com/awslabs/aws-lambda-go-api-proxy v0.11.0

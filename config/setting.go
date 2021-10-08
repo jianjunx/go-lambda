@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
@@ -23,10 +24,14 @@ type SettingConfig struct {
 	Dynamo `mapstructure:"dynamo"`
 }
 
+var config SettingConfig = SettingConfig{}
+
 func init() {
-	viper.BindEnv(ENV_NAME)
+	ok := setConfigName()
+	if !ok {
+		return
+	}
 	viper.AddConfigPath("./config")
-	setConfigName()
 	viper.ReadInConfig()
 	unmarshal()
 	viper.WatchConfig()
@@ -38,19 +43,21 @@ func init() {
 }
 
 // 根据环境变量读取配置文件
-func setConfigName() {
-	ginMode := viper.Get(ENV_NAME)
-	if ginMode == ENV_PROD {
+func setConfigName() bool {
+	mode := os.Getenv(ENV_NAME)
+	if mode == ENV_SLS {
+		// lambda读取配置文件有些问题 这里直接赋值
+		config.App.Port = 80
+		config.App.Env = mode
+		config.Dynamo.Region = os.Getenv("DB_REGION")
+		config.Dynamo.PostTableName = os.Getenv("POST_TABLE_NAME")
+		return false
+	} else if mode == ENV_PROD {
 		viper.SetConfigName("prod.config")
-	} else if ginMode == ENV_SLS {
-		viper.SetConfigName("sls.config")
 	} else {
 		viper.SetConfigName("dev.config")
 	}
-}
-
-var config SettingConfig = SettingConfig{
-	Dynamo: Dynamo{Region: "us-west-1", PostTableName: "YQ_POST_TABLE"},
+	return true
 }
 
 func unmarshal() {

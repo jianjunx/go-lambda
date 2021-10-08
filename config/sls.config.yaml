@@ -1,9 +1,0 @@
-app:
-  name: "ginapp"
-  env: "sls"
-  port: 80
-  version: "1.0.0"
-
-dynamo:
-  region: "us-west-1"
-  post_table_name: "YQ_POST_TABLE"
