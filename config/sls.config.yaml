@@ -1,7 +1,7 @@
 app:
   name: "ginapp"
   env: "sls"
-  port: 3000
+  port: 80
   version: "1.0.0"
 
 dynamo:
