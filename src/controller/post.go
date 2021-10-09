@@ -18,8 +18,11 @@ type addPostBody struct {
 
 // 处理语雀webhook请求
 func PostWebhookYuqueHandler(c *gin.Context) {
+	// 语雀hook URL上增加secret的query参数
 	secret := c.Query("secret")
+	// 提前将验证码存到环境变量中
 	envSecret := os.Getenv("WEBHOOK_SECRET")
+	// 安全校验
 	if secret != envSecret {
 		respError(c, errors.New("secret 验证失败"))
 		return
