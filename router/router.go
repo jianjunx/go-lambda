@@ -22,6 +22,9 @@ func init() {
 	r = gin.Default()
 	// apis
 	registerApis()
-	// 服务端渲染
-	registerHtml()
+	// serverless 只提供api
+	if env != config.ENV_SLS {
+		// 服务端渲染
+		registerHtml()
+	}
 }
