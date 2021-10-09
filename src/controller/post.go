@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"go-zone/packed/utils"
 	"go-zone/src/model"
 	"go-zone/src/service"
 
@@ -33,10 +34,20 @@ func PostWebhookYuqueHandler(c *gin.Context) {
 
 // post列表
 func PostListGetHandler(c *gin.Context) {
-	list, err := service.PostListGet()
+	params := model.PostSearchParam{
+		Page: utils.StrToInt(c.Query("page"), 1),
+		Size: utils.StrToInt(c.Query("size"), 10),
+		Book: utils.StrToInt(c.Query("book"), 0),
+	}
+	list, total, err := service.PostListGet(&params)
 	if err != nil {
 		respError(c, err)
 		return
 	}
-	respSuccess(c, list)
+	respSuccess(c, &model.PageListStruct{
+		Size:  params.Size,
+		Page:  params.Page,
+		Total: total,
+		List:  list,
+	})
 }

@@ -11,17 +11,17 @@ type PostAttributes struct {
 	BodyHtml         string   `json:"body_html" dynamo:"body_html"`                   // 转换过后的正文 HTML
 	CreatorId        int      `json:"creator_id" dynamo:"creator_id"`                 // 文档创建人 User Id
 	Public           int      `json:"public" dynamo:"public"`                         // 公开级别 [0 - 私密, 1 - 公开]
-	Status           int      `json:"status" dynamo:"status"`                         // 状态 [0 - 草稿, 1 - 发布]
+	Status           int      `json:"status" dynamo:"-"`                              // 状态 [0 - 草稿, 1 - 发布]
 	ContentUpdatedAt string   `json:"content_updated_at" dynamo:"content_updated_at"` // 文档内容更新时间
 	DeletedAt        string   `json:"deleted_at" dynamo:"deleted_at"`                 // 删除时间，未删除为 null
 	CreatedAt        string   `json:"created_at" dynamo:"created_at"`                 // 创建时间
 	UpdatedAt        string   `json:"updated_at" dynamo:"updated_at"`                 // 更新时间
 	WordCount        int      `json:"word_count" dynamo:"word_count"`                 // 字数
 	Path             string   `json:"path" dynamo:"path"`                             // 文档的完整访问路径（不包括域名）
-	ActionType       string   `json:"action_type" dynamo:"action_type"`               // 值有 publish - 发布、 update - 更新、 delete - 删除
-	Publish          bool     `json:"publish" dynamo:"publish"`                       // 文档是否为第一次发布，第一次发布时为 true
-	User             PostUser `json:"user" dynamo:"user"`
-	Book             PostBook `json:"book" dynamo:"book"`
+	ActionType       string   `json:"action_type" dynamo:"-"`                         // 值有 publish - 发布、 update - 更新、 delete - 删除
+	Publish          bool     `json:"publish" dynamo:"-"`                             // 文档是否为第一次发布，第一次发布时为 true
+	User             PostUser `json:"user" dynamo:"user"`                             //用户信息
+	Book             PostBook `json:"book" dynamo:"book"`                             // Book 可以当成分类
 }
 
 type PostUser struct {
@@ -40,4 +40,10 @@ type PostBook struct {
 	UserId      int    `json:"user_id" dynamo:"user_id"`
 	Description string `json:"description" dynamo:"description"`
 	ItemsCount  int    `json:"items_count" dynamo:"items_count"` // 文章数量
+}
+
+type PostSearchParam struct {
+	Page int
+	Size int
+	Book int
 }

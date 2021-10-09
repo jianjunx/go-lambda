@@ -29,6 +29,7 @@ provider:
     GOENV_MODE: sls
     DB_REGION: us-west-1
     POST_TABLE_NAME: YQ_POST_TABLE
+    BOOK_TABLE_NAME: YQ_BOOK_TABLE
   stage: prod
 
 # you can overwrite defaults here

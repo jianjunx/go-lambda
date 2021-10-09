@@ -17,6 +17,7 @@ type App struct {
 type Dynamo struct {
 	Region        string `mapstructure:"region"`
 	PostTableName string `mapstructure:"post_table_name"`
+	BookTableName string `mapstructure:"book_table_name"`
 }
 
 type SettingConfig struct {
@@ -51,6 +52,7 @@ func setConfigName() bool {
 		config.App.Env = mode
 		config.Dynamo.Region = os.Getenv("DB_REGION")
 		config.Dynamo.PostTableName = os.Getenv("POST_TABLE_NAME")
+		config.Dynamo.BookTableName = os.Getenv("BOOK_TABLE_NAME")
 		return false
 	} else if mode == ENV_PROD {
 		viper.SetConfigName("prod.config")
