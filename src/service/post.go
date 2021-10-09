@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"go-zone/src/dao"
 	"go-zone/src/model"
 )
@@ -15,6 +16,11 @@ func PostItemDataAdd(row *model.PostAttributes) error {
 		return PostItemDelete(row)
 	}
 	err := dao.PostItemDataPut(row)
+	if err != nil {
+		return err
+	}
+	// 修改book表
+	err = dao.BookItemDataPut(&row.Book)
 	if err != nil {
 		return err
 	}
@@ -41,4 +47,16 @@ func PostListGet(params *model.PostSearchParam) (*[]model.PostAttributes, int, e
 		return nil, 0, err
 	}
 	return &posts, int(total), nil
+}
+
+func PostItemGet(slug string) (*model.PostAttributes, error) {
+	posts := []model.PostAttributes{}
+	err := dao.PostItemIndexGet(&posts, slug)
+	if err != nil {
+		return nil, err
+	}
+	if len(posts) == 0 {
+		return nil, errors.New("没有该文章")
+	}
+	return &posts[0], nil
 }

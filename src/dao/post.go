@@ -1,7 +1,6 @@
 package dao
 
 import (
-	"fmt"
 	"go-zone/src/model"
 
 	"github.com/guregu/dynamo"
@@ -38,28 +37,13 @@ func PostDataScan(posts *[]model.PostAttributes, params *model.PostSearchParam) 
 	return total, nil
 }
 
+func PostItemIndexGet(posts *[]model.PostAttributes, slug string) error {
+	table := getPostTable()
+	return table.Scan().Filter("'slug' = ?", slug).All(posts)
+}
+
 // 删除post
 func PostItemDelete(id int) error {
 	table := getPostTable()
-	return table.Delete("id", id).Run()
-}
-
-// 添加或修改book
-func BookItemDataPut(row *model.PostBook) error {
-	table := getBookTable()
-	return table.Put(row).Run()
-}
-
-// 扫描book
-func BookDataScan(books *[]model.PostBook) error {
-	table := getBookTable()
-	ite := table.Scan().SearchLimit(10).Iter()
-	fmt.Println("ite", ite)
-	return nil
-}
-
-// 根据ID删除book
-func BookItemDelete(id int) error {
-	table := getBookTable()
 	return table.Delete("id", id).Run()
 }
