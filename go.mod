@@ -8,6 +8,7 @@ require (
 	github.com/aws/aws-sdk-go v1.40.57
 	github.com/awslabs/aws-lambda-go-api-proxy v0.11.0
 	github.com/cenkalti/backoff v2.2.1+incompatible // indirect
+	github.com/foolin/gin-template v0.0.0-20190415034731-41efedfb393b
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/gin-gonic/gin v1.7.4
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
