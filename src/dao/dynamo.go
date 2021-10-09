@@ -23,3 +23,7 @@ func DynamoInit() {
 func getPostTable() dynamo.Table {
 	return getTable(config.GetConfig().PostTableName)
 }
+
+func getBookTable() dynamo.Table {
+	return getTable(config.GetConfig().BookTableName)
+}
