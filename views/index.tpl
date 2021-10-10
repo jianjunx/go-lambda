@@ -1,7 +1,18 @@
+
 {{define "content"}}
     <h1 class="hello">This is content!!!!</h1>
-    <p>123 + 333 = {{call $.add 123 333}}</p>
     <p>123 - 100= {{sub 123 100}}</p>
+    <ul>
+    {{range .posts}}
+        <li>{{.Title}}</li>
+    {{end}}
+    </ul>
     <hr>
-    <p><a href="/page">Page render</a></p>
+    <ul>
+    {{range $i, $v := .pagers}}
+        <li data-page="{{$v}}">
+        <a href="javascript:void(0)">{{$v}}</a>
+        </li>
+    {{end}}
+    </ul>
 {{end}}

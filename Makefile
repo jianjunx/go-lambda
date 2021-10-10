@@ -1,4 +1,4 @@
-.PHONY: build clean deploy gomodgen
+.PHONY: build clean deploy gomodgen run
 
 build:
 	export GO111MODULE=on
@@ -9,6 +9,9 @@ deploy: clean build
 
 clean:
 	rm -rf ./bin ./vendor
+
+run:
+	air -d
 
 gomodgen:
 	chmod u+x gomod.sh
