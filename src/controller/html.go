@@ -25,14 +25,16 @@ func HtmlHomeHandler(c *gin.Context) {
 		respError(c, err)
 		return
 	}
+	pages := utils.GetPages(float64(total), float64(params.Size))
 	//render with master
 	c.HTML(http.StatusOK, "index", gin.H{
-		"title":  "Index title!",
-		"books":  books,
-		"posts":  list,
-		"total":  total,
-		"params": params,
-		"pagers": utils.GetPages(float64(total), float64(params.Size)),
+		"title":    "Index title!",
+		"books":    books,
+		"posts":    list,
+		"total":    total,
+		"showPrev": params.Page != 1,
+		"showNext": params.Page != len(pages),
+		"pages":    pages,
 	})
 }
 

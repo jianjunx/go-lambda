@@ -18,4 +18,5 @@
         <hr>
         {{include "layouts/footer"}}
     </body>
+    <script src="/public/js/index.js"></script>
 </html>

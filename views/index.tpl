@@ -10,11 +10,20 @@
     {{end}}
     </ul>
     <hr>
-    <ul>
-    {{range $i, $v := .pagers}}
+    <div class="pagination">
+    {{if .showPrev}}
+        <div>上一页</div>
+    {{end}}
+    <ul class="pagination-page">
+    {{range $i, $v := .pages}}
         <li data-page="{{$v}}">
-        <a href="javascript:void(0)">{{$v}}</a>
+            <a href="javascript:void(0)">{{$v}}</a>
         </li>
     {{end}}
     </ul>
+    {{if .showNext}}
+        <div>下一页</div>
+    {{end}}
+
+    </div>
 {{end}}
