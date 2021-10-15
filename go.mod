@@ -16,10 +16,13 @@ require (
 	github.com/guregu/dynamo v1.11.0
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
+	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/spf13/viper v1.9.0
 	github.com/ugorji/go v1.2.6 // indirect
+	go.uber.org/zap v1.17.0
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/net v0.0.0-20211006190231-62292e806868 // indirect
 	golang.org/x/sys v0.0.0-20211006225509-1a26e0398eed // indirect
 	golang.org/x/text v0.3.7 // indirect
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 )

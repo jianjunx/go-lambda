@@ -12,6 +12,7 @@ import (
 func HtmlHomeHandler(c *gin.Context) {
 	books, err := service.BookListGet()
 	if err != nil {
+		respError(c, err)
 		return
 	}
 	params := model.PostSearchParam{
@@ -38,11 +39,13 @@ func HtmlHomeHandler(c *gin.Context) {
 func HtmlPostDetailHandler(c *gin.Context) {
 	books, err := service.BookListGet()
 	if err != nil {
+		respError(c, err)
 		return
 	}
 	slue := c.Param("slue")
 	detail, err := service.PostItemGet(slue)
 	if err != nil {
+		respError(c, err)
 		return
 	}
 	c.HTML(http.StatusOK, "page.tpl", gin.H{

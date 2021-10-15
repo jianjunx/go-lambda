@@ -63,7 +63,7 @@ package:
 
 functions:
   apis:
-    handler: bin/apis
+    handler: bin/main
     events:
       - httpApi:
           path: /api/v1/webhook/yuque

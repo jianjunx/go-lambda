@@ -20,9 +20,18 @@ type Dynamo struct {
 	BookTableName string `mapstructure:"book_table_name"`
 }
 
+type Log struct {
+	Level      string `mapstructure:"level"`
+	Filename   string `mapstructure:"filename"`
+	Maxsize    int    `mapstructure:"maxsize"`
+	Maxage     int    `mapstructure:"maxage"`
+	Maxbackups int    `mapstructure:"maxbackups"`
+}
+
 type SettingConfig struct {
 	App    `mapstructure:"app"`
 	Dynamo `mapstructure:"dynamo"`
+	Log    `mapstructure:"log"`
 }
 
 var config SettingConfig = SettingConfig{}

@@ -8,3 +8,10 @@ dynamo:
   region: "us-west-1"
   post_table_name: "YQ_POST_TABLE"
   book_table_name: "YQ_BOOK_TABLE"
+
+log:
+  level: "debug"
+  filename: "./history.log"
+  maxsize: 1
+  maxbackups: 5
+  maxage: 30

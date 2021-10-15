@@ -18,3 +18,15 @@ $ export GOENV_MODE=prod
 ```bash
 $ make deploy
 ```
+
+部署到服务器
+```bash
+$ make publish
+# 将bin下的文件上传到服务器
+# 用nohub 启动
+$ nohub ./main &
+# 关闭服务
+$ ps -aux | grep "./mian"
+# 找到PID杀死进程
+$ kill 1
+```
