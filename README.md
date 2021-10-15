@@ -14,6 +14,7 @@ $ go mod tidy
 $ export GOENV_MODE=prod
 ```
 
+
 发布到serverless
 ```bash
 $ make deploy
@@ -29,4 +30,12 @@ $ nohub ./main &
 $ ps -aux | grep "./mian"
 # 找到PID杀死进程
 $ kill 1
+```
+
+语雀配置
+在消息推送中设置webhook，URL为 ${host}/api/v1/webhook/yuque?secret=xxx
+然后在服务器环境变量里设置WEBHOOK_SECRET用于安全性验证
+```bash
+# 要和URL中query参数secret=xxx 保持一致
+$ export WEBHOOK_SECRET=xxx
 ```
