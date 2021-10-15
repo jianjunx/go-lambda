@@ -1,13 +1,12 @@
 package router
 
 import (
+	"go-zone/packed/utils"
 	"go-zone/src/controller"
 	"html/template"
 	"net/http"
-	"time"
 
 	gintemplate "github.com/foolin/gin-template"
-	"github.com/gin-gonic/gin"
 )
 
 func registerHtml() {
@@ -22,17 +21,13 @@ func registerHtml() {
 			"sub": func(a, b int) int {
 				return a - b
 			},
-			"copy": func() string {
-				return time.Now().Format("2006")
-			},
+			"copy":      utils.CopyRight,
+			"innerHtml": utils.InnerHtml,
 		},
 		DisableCache: true,
 	})
 
 	r.GET("/", controller.HtmlHomeHandler)
 
-	r.GET("/p/:slue", func(ctx *gin.Context) {
-		//render only file, must full name with extension
-		ctx.HTML(http.StatusOK, "page.tpl", gin.H{"title": "Page file title!!"})
-	})
+	r.GET("/p/:slue", controller.HtmlPostDetailHandler)
 }

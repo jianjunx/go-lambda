@@ -4,7 +4,9 @@
     <p>123 - 100= {{sub 123 100}}</p>
     <ul>
     {{range .posts}}
-        <li>{{.Title}}</li>
+        <li>
+        <a href="/p/{{.Slug}}">{{.Title}}</a>
+        </li>
     {{end}}
     </ul>
     <hr>

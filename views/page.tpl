@@ -8,8 +8,11 @@
     </head>
 
     <body>
-        <a href="/"><- Back home!</a>
         {{template "ad" .}}
+        <div class="content">
+        <h1>{{.detail.Title}}</h1>
+        {{innerHtml .detail.BodyHtml}}
+        </div>
         <hr>
         {{include "layouts/footer"}}
     </body>

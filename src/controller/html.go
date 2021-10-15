@@ -1,11 +1,9 @@
 package controller
 
 import (
-	"fmt"
 	"go-zone/packed/utils"
 	"go-zone/src/model"
 	"go-zone/src/service"
-	"math"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,12 +24,6 @@ func HtmlHomeHandler(c *gin.Context) {
 		respError(c, err)
 		return
 	}
-	pagers := []float64{}
-	len := math.Ceil(float64(total / params.Size))
-	for i := 0.0; i < len; i++ {
-		pagers = append(pagers, i+1)
-	}
-	fmt.Println("ppppppp", pagers)
 	//render with master
 	c.HTML(http.StatusOK, "index", gin.H{
 		"title":  "Index title!",
@@ -39,6 +31,23 @@ func HtmlHomeHandler(c *gin.Context) {
 		"posts":  list,
 		"total":  total,
 		"params": params,
-		"pagers": pagers,
+		"pagers": utils.GetPages(float64(total), float64(params.Size)),
+	})
+}
+
+func HtmlPostDetailHandler(c *gin.Context) {
+	books, err := service.BookListGet()
+	if err != nil {
+		return
+	}
+	slue := c.Param("slue")
+	detail, err := service.PostItemGet(slue)
+	if err != nil {
+		return
+	}
+	c.HTML(http.StatusOK, "page.tpl", gin.H{
+		"title":  "Index title!",
+		"books":  books,
+		"detail": detail,
 	})
 }
