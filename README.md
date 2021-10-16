@@ -32,6 +32,16 @@ $ ps -aux | grep "./mian"
 $ kill 1
 ```
 
+docker部署
+```bash
+$ docker build . -t go-lambda 
+```
+将镜像push到镜像仓库，然后在服务器端更新
+```bash
+# 运行镜像 加载本地blog.env环境变量 映射3000端口 将logs文件夹与本地home/log映射
+$ docker run --env-file blog.env -p 3000:3000 -v /logs:/home/logs --name go-blog -d 镜像名称:版本 
+```
+
 语雀配置
 在消息推送中设置webhook，URL为 ${host}/api/v1/webhook/yuque?secret=xxx
 然后在服务器环境变量里设置WEBHOOK_SECRET用于安全性验证

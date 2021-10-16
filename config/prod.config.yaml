@@ -11,7 +11,7 @@ dynamo:
 
 log:
   level: "debug"
-  filename: "./history.log"
+  filename: "./logs/blog.log"
   maxsize: 1
   maxbackups: 5
   maxage: 30
