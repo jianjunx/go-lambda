@@ -23,7 +23,7 @@ RUN go build -o main .
 ###################
 # 接下来创建一个小镜像
 ###################
-FROM debian:stretch-slim
+FROM scratch
 
 COPY ./public /public
 COPY ./config /config
