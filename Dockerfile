@@ -24,7 +24,7 @@ RUN go build -ldflags="-s -w" -o main ./main.go
 ###################
 # 接下来创建一个小镜像
 ###################
-FROM scratch
+FROM alpine:latest
 
 COPY ./public /public
 COPY ./config /config
@@ -35,4 +35,4 @@ COPY ./views /views
 COPY --from=builder /build/main /
 
 # 需要运行的命令
-ENTRYPOINT ["./main"]
+ENTRYPOINT ["/main"]
