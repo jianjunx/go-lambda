@@ -19,7 +19,7 @@ RUN go mod download
 COPY . .
 
 # 将我们的代码编译成二进制可执行文件 main
-RUN go build -o main .
+RUN go build -ldflags="-s -w" -o main ./main.go
 
 ###################
 # 接下来创建一个小镜像
@@ -35,4 +35,4 @@ COPY ./views /views
 COPY --from=builder /build/main /
 
 # 需要运行的命令
-ENTRYPOINT ["/main"]
+ENTRYPOINT ["./main"]

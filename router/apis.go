@@ -1,6 +1,11 @@
 package router
 
-import "go-zone/src/controller"
+import (
+	"go-zone/src/controller"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 func registerApis() {
 	// 注册路由
@@ -14,5 +19,9 @@ func registerApis() {
 		v1.GET("/post/:slug", controller.PostItemGetHandler)
 		// 获取book列表
 		v1.GET("/books", controller.BookListGetHandler)
+		// test
+		v1.GET("/test", func(c *gin.Context) {
+			c.JSON(http.StatusOK, gin.H{"err": 0, "msg": "okok"})
+		})
 	}
 }
