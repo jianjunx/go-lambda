@@ -39,7 +39,7 @@ $ docker build . -t go-lambda
 将镜像push到镜像仓库，然后在服务器端更新
 ```bash
 # 运行镜像 加载本地blog.env环境变量 映射3000端口 将logs文件夹与本地home/log映射
-$ docker run --env-file blog.env -p 3000:3000 -v /logs:/home/logs --name go-blog -d 镜像名称:版本 
+$ docker run --env-file blog.env -p 3000:3000 -v /home/logs:/logs --name go-blog -d 镜像名称:版本 
 ```
 
 语雀配置
